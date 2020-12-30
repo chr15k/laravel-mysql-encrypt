@@ -1,19 +1,22 @@
 # Laravel MySql AES Encrypt/Decrypt
 
+[![Latest Stable Version](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/v)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Latest Unstable Version](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/v/unstable)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Total Downloads](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/downloads)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![License](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/license)](//packagist.org/packages/chr15k/laravel-mysql-encrypt)
+
 Laravel database encryption at database side using native AES_DECRYPT and AES_ENCRYPT functions.
 Automatically encrypt and decrypt fields in your Models.
 
-## 1. Install
+## Install
+### 1. Composer
 ```bash
 composer require chr15k/laravel-mysql-encrypt
 ```
 
-## 2. Publish config (optional)
+### 2. Publish config (optional)
 ```bash
 php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\MysqlEncryptServiceProvider"
 ```
 
-## 3. Configure Provider (Laravel 5.4 or earlier)
+### 3. Configure Provider (Laravel 5.4 or earlier)
 For Laravel 5.4 or earlier, you'll need to add the following to config/app.php:
 
 ```php
@@ -22,7 +25,7 @@ For Laravel 5.4 or earlier, you'll need to add the following to config/app.php:
 )
 ```
 
-## 4. Set encryption key in `.env` file
+### 4. Set encryption key in `.env` file
 ```
 APP_AESENCRYPT_KEY=yourencryptionkey
 ```
@@ -65,3 +68,6 @@ DB::statement('ALTER TABLE `users` ADD `last_name` VARBINARY(300)');
 DB::statement('ALTER TABLE `users` ADD `email` VARBINARY(300)');
 DB::statement('ALTER TABLE `users` ADD `telephone` VARBINARY(50)');
 ```
+
+## License
+The MIT License (MIT). Please see [License File](https://github.com/chr15k/laravel-mysql-encrypt/blob/master/LICENSE) for more information.
