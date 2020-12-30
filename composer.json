@@ -1,0 +1,44 @@
+{
+    "name": "chr15k/laravel-mysql-encrypt",
+    "description": "Laravel 5.x | 6.x | 7.x Database encryption mysql side",
+    "keywords": [
+        "laravel",
+        "chr15k",
+        "mysql",
+        "encryption",
+        "php",
+        "pii"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christopher Keller",
+            "email": "ctk8501@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5",
+        "illuminate/support": "^5.0|^6.0|^7.0",
+        "illuminate/database": "^5.0|^6.0|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chr15k\\MysqlEncrypt\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chr15k\\MysqlEncrypt\\MysqlEncryptServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
