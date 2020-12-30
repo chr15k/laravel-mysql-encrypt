@@ -1,10 +1,10 @@
 <?php
 
-namespace Chr15k\MysqlEncrypt;
+namespace Chr15k\MysqlEncrypt\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class MysqlEncryptServiceProvider extends ServiceProvider
+class LaravelServiceProvider extends ServiceProvider
 {
     /**
      * {@inheritdoc}

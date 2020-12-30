@@ -35,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Chr15k\\MysqlEncrypt\\MysqlEncryptServiceProvider"
+                "Chr15k\\MysqlEncrypt\\Providers\\LaravelServiceProvider"
             ]
         }
     },
