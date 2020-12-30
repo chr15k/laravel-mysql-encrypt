@@ -69,5 +69,11 @@ DB::statement('ALTER TABLE `users` ADD `email` VARBINARY(300)');
 DB::statement('ALTER TABLE `users` ADD `telephone` VARBINARY(50)');
 ```
 
+## Lumen support
+Add the following to `bootstrap/app.php`:
+```php
+$app->register(Chr15k\MysqlEncrypt\Providers\LumenServiceProvider::class);
+```
+
 ## License
 The MIT License (MIT). Please see [License File](https://github.com/chr15k/laravel-mysql-encrypt/blob/master/LICENSE) for more information.
