@@ -19,7 +19,7 @@ php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\MysqlEncryptServicePr
 ### 3. Configure Provider
 - For Laravel 5.5 or later, the service provider is automatically loaded, skip this step.
 
-- For Laravel 5.4 or earlier, you'll need to add the following to `config/app.php`:
+- For Laravel 5.4 or earlier, add the following to `config/app.php`:
 ```php
 'providers' => array(
     Chr15k\\MysqlEncrypt\\MysqlEncryptServiceProvider::class
