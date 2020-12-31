@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/v)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Latest Unstable Version](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/v/unstable)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Total Downloads](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/downloads)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![License](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/license)](//packagist.org/packages/chr15k/laravel-mysql-encrypt)
 
-Laravel database encryption at database side using native AES_DECRYPT and AES_ENCRYPT functions.
+Laravel/Lumen database encryption at database side using native AES_DECRYPT and AES_ENCRYPT functions.
 Automatically encrypt and decrypt fields in your Models.
 
 ## Install
@@ -16,13 +16,20 @@ composer require chr15k/laravel-mysql-encrypt
 php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\MysqlEncryptServiceProvider"
 ```
 
-### 3. Configure Provider (Laravel 5.4 or earlier)
-For Laravel 5.4 or earlier, you'll need to add the following to config/app.php:
+### 3. Configure Provider
+For Laravel 5.5 or later then the service provider is automatically loaded.
+
+For Laravel 5.4 or earlier, you'll need to add the following to `config/app.php`:
 
 ```php
 'providers' => array(
     Chr15k\\MysqlEncrypt\\MysqlEncryptServiceProvider::class
-)
+);
+```
+
+For Lumen, add the following to `bootstrap/app.php`:
+```php
+$app->register(Chr15k\MysqlEncrypt\Providers\LumenServiceProvider::class);
 ```
 
 ### 4. Set encryption key in `.env` file
@@ -52,6 +59,28 @@ class User extends Model
 }
 ```
 
+## Validators
+`unique_encrypted`
+```
+unique_encrypted:<table>,<field(optional)>
+```
+
+`exists_encrypted`
+```
+exists_encrypted:<table>,<field(optional)>
+```
+
+## Scopes
+Custom Local scopes available:
+
+- whereEncrypted
+- whereNotEncrypted
+- orWhereEncrypted
+- orWhereNotEncrypted
+- orderByEncrypted
+
+Global scope `DecryptSelectScope` automatically booted in models using `Encryptable` trait.
+
 ## Schema columns to support encrypted data
 ```php
 Schema::create('users', function (Blueprint $table) {
@@ -67,12 +96,6 @@ DB::statement('ALTER TABLE `users` ADD `first_name` VARBINARY(300)');
 DB::statement('ALTER TABLE `users` ADD `last_name` VARBINARY(300)');
 DB::statement('ALTER TABLE `users` ADD `email` VARBINARY(300)');
 DB::statement('ALTER TABLE `users` ADD `telephone` VARBINARY(50)');
-```
-
-## Lumen support
-Add the following to `bootstrap/app.php`:
-```php
-$app->register(Chr15k\MysqlEncrypt\Providers\LumenServiceProvider::class);
 ```
 
 ## License
