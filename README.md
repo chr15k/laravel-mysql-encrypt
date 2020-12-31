@@ -22,7 +22,7 @@ php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\MysqlEncryptServicePr
 - For Laravel 5.4 or earlier, add the following to `config/app.php`:
 ```php
 'providers' => array(
-    Chr15k\\MysqlEncrypt\\MysqlEncryptServiceProvider::class
+    Chr15k\\MysqlEncrypt\\Providers\\LaravelServiceProvider::class
 );
 ```
 
