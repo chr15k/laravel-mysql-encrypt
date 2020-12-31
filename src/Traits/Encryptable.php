@@ -2,7 +2,6 @@
 
 namespace Chr15k\MysqlEncrypt\Traits;
 
-use Illuminate\Support\Facades\DB;
 use Chr15k\MysqlEncrypt\Scopes\DecryptSelectScope;
 
 trait Encryptable

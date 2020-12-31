@@ -2,11 +2,6 @@
 
 namespace Chr15k\MysqlEncrypt\Providers;
 
-use PDOException;
-use InvalidArgumentException;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Chr15k\MysqlEncrypt\Traits\ValidatesEncrypted;
 
