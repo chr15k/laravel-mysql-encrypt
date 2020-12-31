@@ -17,17 +17,16 @@ php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\MysqlEncryptServicePr
 ```
 
 ### 3. Configure Provider
-For Laravel 5.5 or later then the service provider is automatically loaded.
+- For Laravel 5.5 or later, the service provider is automatically loaded, skip this step.
 
-For Laravel 5.4 or earlier, you'll need to add the following to `config/app.php`:
-
+- For Laravel 5.4 or earlier, you'll need to add the following to `config/app.php`:
 ```php
 'providers' => array(
     Chr15k\\MysqlEncrypt\\MysqlEncryptServiceProvider::class
 );
 ```
 
-For Lumen, add the following to `bootstrap/app.php`:
+- For Lumen, add the following to `bootstrap/app.php`:
 ```php
 $app->register(Chr15k\MysqlEncrypt\Providers\LumenServiceProvider::class);
 ```
@@ -73,11 +72,11 @@ exists_encrypted:<table>,<field(optional)>
 ## Scopes
 Custom Local scopes available:
 
-- whereEncrypted
-- whereNotEncrypted
-- orWhereEncrypted
-- orWhereNotEncrypted
-- orderByEncrypted
+`whereEncrypted`
+`whereNotEncrypted`
+`orWhereEncrypted`
+`orWhereNotEncrypted`
+`orderByEncrypted`
 
 Global scope `DecryptSelectScope` automatically booted in models using `Encryptable` trait.
 
