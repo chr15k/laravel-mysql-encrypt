@@ -44,6 +44,6 @@ if (! function_exists('db_decrypt_string')) {
      */
     function db_decrypt_string($column, $value, $operator = 'LIKE')
     {
-        return 'AES_DECRYPT('.$column.', "'.config("mysql-encrypt.key").'") "'.$operator.'" "'.$value.'" COLLATE utf8mb4_general_ci';
+        return 'AES_DECRYPT('.$column.', "'.config("mysql-encrypt.key").'") '.$operator.' "'.$value.'" COLLATE utf8mb4_general_ci';
     }
 }
