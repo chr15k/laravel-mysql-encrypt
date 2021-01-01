@@ -12,8 +12,15 @@ composer require chr15k/laravel-mysql-encrypt
 ```
 
 ### 2. Publish config (optional)
+`Laravel`
 ```bash
-php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\MysqlEncryptServiceProvider"
+php artisan vendor:publish --provider="Chr15k\MysqlEncrypt\Providers\LaravelServiceProvider"
+```
+
+`Lumen`
+```bash
+mkdir -p config
+cp vendor/chr15k/laravel-mysql-encrypt/config/config.php config/mysql-encrypt.php
 ```
 
 ### 3. Configure Provider
