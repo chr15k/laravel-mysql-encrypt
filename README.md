@@ -24,6 +24,7 @@ cp vendor/chr15k/laravel-mysql-encrypt/config/config.php config/mysql-encrypt.ph
 ```
 
 ### 3. Configure Provider
+`Laravel`
 - For Laravel 5.5 or later, the service provider is automatically loaded, skip this step.
 
 - For Laravel 5.4 or earlier, add the following to `config/app.php`:
@@ -33,6 +34,7 @@ cp vendor/chr15k/laravel-mysql-encrypt/config/config.php config/mysql-encrypt.ph
 );
 ```
 
+`Lumen`
 - For Lumen, add the following to `bootstrap/app.php`:
 ```php
 $app->register(Chr15k\MysqlEncrypt\Providers\LumenServiceProvider::class);
