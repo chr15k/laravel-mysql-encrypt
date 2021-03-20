@@ -28,7 +28,7 @@ trait ValidatesEncrypted
 
             $items = DB::select("SELECT count(*) as aggregate FROM `".$parameters[0]."` WHERE AES_DECRYPT(`".$field."`, '".config("app.key")."') LIKE '".$value."' COLLATE utf8mb4_general_ci".($ignore ? " AND id != ".$ignore : ''));
 
-            return $items[0]->aggregate === 0;
+            return $items[0]->aggregate == 0;
         });
 
         Validator::extend('exists_encrypted', function ($attribute, $value, array $parameters) {
