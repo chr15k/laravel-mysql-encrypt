@@ -15,7 +15,7 @@ class LaravelServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('mysql-encrypt.php'),
+            __DIR__.'/../../config/config.php' => config_path('mysql-encrypt.php'),
         ], 'config');
 
         $this->addValidators();
@@ -26,6 +26,6 @@ class LaravelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'mysql-encrypt');
+        $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'mysql-encrypt');
     }
 }
