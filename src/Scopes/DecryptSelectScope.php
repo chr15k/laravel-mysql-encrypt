@@ -20,8 +20,12 @@ class DecryptSelectScope implements Scope
     {
         $encryptable = $model->encryptable();
 
-        $columns = empty($columns) ? Schema::getColumnListing($model->getTable()) : $columns;
-
+        //original
+        //$columns = empty($columns) ? Schema::getColumnListing($model->getTable()) : $columns;
+        
+        //using in multi database
+        $columns = empty($columns) ? Schema::connection($model->getConnectionName())->getColumnListing($model->getTable()) : $columns;
+        
         if (empty($encryptable) || empty($columns)) {
             return $builder->addSelect(...$columns);
         }
