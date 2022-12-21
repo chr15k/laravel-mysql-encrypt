@@ -28,7 +28,8 @@ if (! function_exists('db_decrypt')) {
     {
         $key = config('mysql-encrypt.key');
 
-        return DB::raw("AES_DECRYPT({$column}, '{$key}') AS '{$column}'");
+        //return DB::raw("AES_DECRYPT({$column}, '{$key}') AS '{$column}'");
+        return DB::raw("CAST(AES_DECRYPT({$column}, '{$key}') as CHAR) AS '{$column}'");
     }
 }
 
