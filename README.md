@@ -58,7 +58,7 @@ class User extends Model
 
 ## Validators
 
-### UniqueEncrypted(<table>,<field(optional)>,<ignore_id(optional)>)
+### # UniqueEncrypted(table, field(optional), ignore_id(optional))
 
 ```php
 <?php
@@ -70,7 +70,7 @@ Validator::make($data, [
 ]);
 ```
 
-### ExistsEncrypted(<table>,<field(optional)>)
+### # ExistsEncrypted(table,field(optional))
 
 ```php
 <?php
