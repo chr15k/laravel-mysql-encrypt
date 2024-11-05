@@ -58,16 +58,28 @@ class User extends Model
 
 ## Validators
 
-`unique_encrypted`
+### UniqueEncrypted(<table>,<field(optional)>,<ignore_id(optional)>)
 
-```
-unique_encrypted:<table>,<field(optional)>,<ignore_id(optional)>
+```php
+<?php
+
+use Chr15k\MysqlEncrypt\Rules\UniqueEncrypted;
+
+Validator::make($data, [
+    'name' => [new UniqueEncrypted('users')],
+]);
 ```
 
-`exists_encrypted`
+### ExistsEncrypted(<table>,<field(optional)>)
 
-```
-exists_encrypted:<table>,<field(optional)>
+```php
+<?php
+
+use Chr15k\MysqlEncrypt\Rules\ExistsEncrypted;
+
+Validator::make($data, [
+    'name' => [new ExistsEncrypted('users')],
+]);
 ```
 
 ## Scopes
