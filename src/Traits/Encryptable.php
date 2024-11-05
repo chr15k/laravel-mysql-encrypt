@@ -3,112 +3,94 @@
 namespace Chr15k\MysqlEncrypt\Traits;
 
 use Chr15k\MysqlEncrypt\Scopes\DecryptSelectScope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Concerns\AsPivot;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Collection;
 
 trait Encryptable
 {
-    /**
-     * @return void
-     */
-    public static function bootEncryptable()
+    public static function bootEncryptable(): void
     {
         static::addGlobalScope(new DecryptSelectScope);
+
+        static::saved(function ($model) {
+            if ($model->hasDirtyEncrypted()) {
+                $model->refreshWithGlobalScopes();
+            }
+        });
     }
 
-    /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return mixed
-     */
     public function setAttribute($key, $value)
     {
-        if (is_null($value) || !in_array($key, $this->encryptable)) {
+        if ($this->shouldBypass($key)) {
             return parent::setAttribute($key, $value);
         }
 
         return parent::setAttribute($key, db_encrypt($value));
     }
 
-    /**
-     * @return array
-     */
     public function encryptable(): array
     {
         return $this->encryptable ?? [];
     }
 
-   /**
-     * where for encrypted columns
-     *
-     * @param $query
-     * @param $column
-     * @param $value
-     *
-     * @return mixed
-     */
-    public function scopeWhereEncrypted($query, $column, $value)
+    public function hasDirtyEncrypted(): bool
     {
-        /** @var Builder $query */
+        return (bool) $this->getDirtyEncrypted()->count();
+    }
+
+    public function getDirtyEncrypted(): Collection
+    {
+        return collect($this->getDirty())
+            ->filter(fn ($value, $key) => in_array($key, $this->encryptable()));
+    }
+
+    public function refreshWithGlobalScopes(): self
+    {
+        $this->setRawAttributes(
+            $this->useWritePdo()
+                ->firstOrFail()
+                ->attributes
+        );
+
+        $this->load(collect($this->relations)->reject(function ($relation) {
+            return $relation instanceof Pivot
+                || (is_object($relation) && in_array(AsPivot::class, class_uses_recursive($relation), true));
+        })->keys()->all());
+
+        $this->syncOriginal();
+
+        return $this;
+    }
+
+    private function shouldBypass(string $key): bool
+    {
+        return ! in_array($key, $this->encryptable());
+    }
+
+    public function scopeWhereEncrypted(Builder $query, string $column, string $value): Builder
+    {
         return $query->whereRaw(db_decrypt_string($column, $value));
     }
 
-    /**
-     * where not for encrypted columns
-     *
-     * @param $query
-     * @param $column
-     * @param $value
-     *
-     * @return mixed
-     */
-    public function scopeWhereNotEncrypted($query, $column, $value)
+    public function scopeWhereNotEncrypted(Builder $query, string $column, string $value): Builder
     {
-        /** @var Builder $query */
         return $query->whereRaw(db_decrypt_string($column, $value, 'NOT LIKE'));
     }
 
-    /**
-     * orWhere for encrypted columns
-     *
-     * @param $query
-     * @param $column
-     * @param $value
-     *
-     * @return mixed
-     */
-    public function scopeOrWhereEncrypted($query, $column, $value)
+    public function scopeOrWhereEncrypted(Builder $query, string $column, string $value): Builder
     {
-        /** @var Builder $query */
         return $query->orWhereRaw(db_decrypt_string($column, $value));
     }
 
-    /**
-     * orWhere not for encrypted columns
-     *
-     * @param $query
-     * @param $column
-     * @param $value
-     *
-     * @return mixed
-     */
-    public function scopeOrWhereNotEncrypted($query, $column, $value)
+    public function scopeOrWhereNotEncrypted(Builder $query, string $column, string $value): Builder
     {
-        /** @var Builder $query */
         return $query->orWhereRaw(db_decrypt_string($column, $value, 'NOT LIKE'));
     }
 
-    /**
-     * orderBy for encrypted columns
-     *
-     * @param $query
-     * @param $column
-     * @param $direction
-     *
-     * @return mixed
-     */
-    public function scopeOrderByEncrypted($query, $column, $direction)
+    public function scopeOrderByEncrypted(Builder $query, string $column, mixed $direction): Builder
     {
-        /** @var Builder $query */
         return $query->orderByRaw(db_decrypt_string($column, $direction, ''));
     }
 }

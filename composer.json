@@ -1,13 +1,14 @@
 {
     "name": "chr15k/laravel-mysql-encrypt",
-    "description": "Laravel 5.x | 6.x | 7.x | 8.x Database encryption mysql side",
+    "description": "Laravel database encryption using native MySQL functions",
     "keywords": [
         "laravel",
         "chr15k",
         "mysql",
         "encryption",
         "php",
-        "pii"
+        "pii",
+        "gdpr"
     ],
     "license": "MIT",
     "authors": [
@@ -17,13 +18,15 @@
         }
     ],
     "require": {
-        "php": "^7.2.5",
-        "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
-        "illuminate/database": "^5.0|^6.0|^7.0|^8.0"
+        "php": "^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/database": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/console": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
-            "Chr15k\\MysqlEncrypt\\": "src/"
+            "Chr15k\\MysqlEncrypt\\": "src"
         },
         "files": [
             "src/helpers.php"
@@ -35,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Chr15k\\MysqlEncrypt\\Providers\\LaravelServiceProvider"
+                "Chr15k\\MysqlEncrypt\\Providers\\MysqlEncryptServiceProvider"
             ]
         }
     },

@@ -1,49 +1,34 @@
 <?php
 
+use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\DB;
 
 if (! function_exists('db_encrypt')) {
-    /**
-     * Encrypt value.
-     *
-     * @param  mixed $value
-     * @return \Illuminate\Database\Query\Expression
-     */
-    function db_encrypt($value)
+    function db_encrypt(mixed $value): Expression
     {
-        $key = config('mysql-encrypt.key');
-
-        return DB::raw("AES_ENCRYPT('{$value}', '{$key}')");
+        return DB::raw(sprintf(
+            "AES_ENCRYPT('%s', UNHEX('%s'))",
+            $value, config('mysql-encrypt.key')
+        ));
     }
 }
 
 if (! function_exists('db_decrypt')) {
-    /**
-     * Decrpyt value.
-     *
-     * @param  mixed $column
-     * @return \Illuminate\Database\Query\Expression
-     */
-    function db_decrypt($column)
+    function db_decrypt(mixed $column): Expression
     {
-        $key = config('mysql-encrypt.key');
-
-        return DB::raw("AES_DECRYPT({$column}, '{$key}') AS '{$column}'");
+        return DB::raw(sprintf(
+            "CAST(AES_DECRYPT(%s, UNHEX('%s')) as CHAR) AS '%s'",
+            $column, config('mysql-encrypt.key'), $column
+        ));
     }
 }
 
-
 if (! function_exists('db_decrypt_string')) {
-    /**
-     * Decrpyt value.
-     *
-     * @param  string  $column
-     * @param  string  $value
-     * @param  string  $operator
-     * @return string
-     */
-    function db_decrypt_string($column, $value, $operator = 'LIKE')
+    function db_decrypt_string(string $column, string $value, string $operator = 'LIKE'): string
     {
-        return 'AES_DECRYPT('.$column.', "'.config("mysql-encrypt.key").'") '.$operator.' "'.$value.'" COLLATE utf8mb4_general_ci';
+        return sprintf(
+            "CAST(AES_DECRYPT(%s, UNHEX('%s')) as CHAR) %s '%s'",
+            $column, config('mysql-encrypt.key'), $operator, $value
+        );
     }
 }
