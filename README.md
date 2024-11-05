@@ -1,6 +1,6 @@
 # Laravel MySql AES Encrypt/Decrypt
 
-[![Latest Stable Version](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/v)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Latest Unstable Version](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/v/unstable)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Total Downloads](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/downloads)](//packagist.org/packages/chr15k/laravel-mysql-encrypt) [![License](https://poser.pugx.org/chr15k/laravel-mysql-encrypt/license)](//packagist.org/packages/chr15k/laravel-mysql-encrypt)
+[![Latest Stable Version](http://poser.pugx.org/chr15k/laravel-mysql-encrypt/v)](https://packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Total Downloads](http://poser.pugx.org/chr15k/laravel-mysql-encrypt/downloads)](https://packagist.org/packages/chr15k/laravel-mysql-encrypt) [![Latest Unstable Version](http://poser.pugx.org/chr15k/laravel-mysql-encrypt/v/unstable)](https://packagist.org/packages/chr15k/laravel-mysql-encrypt) [![License](http://poser.pugx.org/chr15k/laravel-mysql-encrypt/license)](https://packagist.org/packages/chr15k/laravel-mysql-encrypt) [![PHP Version Require](http://poser.pugx.org/chr15k/laravel-mysql-encrypt/require/php)](https://packagist.org/packages/chr15k/laravel-mysql-encrypt)
 
 Laravel MySQL encryption using native MySQL AES_DECRYPT and AES_ENCRYPT functions.
 Automatically encrypt and decrypt fields in your Models.
