@@ -1,3 +1,7 @@
+## 2.0.2 - 2024-11-05
+
+-   Remove console attribute
+
 ## 2.0.1 - 2024-11-05
 
 -   Update readme
