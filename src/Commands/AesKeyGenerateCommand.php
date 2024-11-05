@@ -6,9 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'laravel-mysql-encrypt:key:generate')]
 class AesKeyGenerateCommand extends Command
 {
     use ConfirmableTrait;
