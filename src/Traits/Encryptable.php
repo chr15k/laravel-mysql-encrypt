@@ -49,7 +49,11 @@ trait Encryptable
     public function refreshWithGlobalScopes(): self
     {
         $this->setRawAttributes(
-            $this->useWritePdo()
+            $this->where(
+                $this->getKeyName(),
+                $this->getKeyForSelectQuery()
+            )
+                ->useWritePdo()
                 ->firstOrFail()
                 ->attributes
         );
