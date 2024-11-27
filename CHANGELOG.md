@@ -1,3 +1,7 @@
+## 2.0.4 - 2024-11-27
+
+-   Fix model refresh issue relating to dirty encryptable attributes
+
 ## 2.0.3 - 2024-11-05
 
 -   Update readme
