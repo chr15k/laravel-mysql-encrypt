@@ -1,3 +1,9 @@
+## 2.1.0 - 2024-11-29
+
+-   Minor refactor
+-   Tests added
+-   Missing AES key exception class added
+
 ## 2.0.4 - 2024-11-27
 
 -   Fix model refresh issue relating to dirty encryptable attributes

@@ -24,6 +24,10 @@
         "illuminate/console": "^8.0|^9.0|^10.0|^11.0",
         "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0"
     },
+    "require-dev": {
+        "orchestra/testbench": "^9.5",
+        "phpunit/phpunit": "^9.6|^10.5|^11.4"
+    },
     "autoload": {
         "psr-4": {
             "Chr15k\\MysqlEncrypt\\": "src"
@@ -31,6 +35,11 @@
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chr15k\\MysqlEncrypt\\Tests\\": "tests"
+        }
     },
     "config": {
         "sort-packages": true

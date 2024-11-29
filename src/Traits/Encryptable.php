@@ -2,6 +2,7 @@
 
 namespace Chr15k\MysqlEncrypt\Traits;
 
+use Chr15k\MysqlEncrypt\MysqlEncrypt;
 use Chr15k\MysqlEncrypt\Scopes\DecryptSelectScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Concerns\AsPivot;
@@ -27,7 +28,7 @@ trait Encryptable
             return parent::setAttribute($key, $value);
         }
 
-        return parent::setAttribute($key, db_encrypt($value));
+        return parent::setAttribute($key, MysqlEncrypt::encrypt($value));
     }
 
     public function encryptable(): array
@@ -75,26 +76,26 @@ trait Encryptable
 
     public function scopeWhereEncrypted(Builder $query, string $column, string $value): Builder
     {
-        return $query->whereRaw(db_decrypt_string($column, $value));
+        return $query->whereRaw(MysqlEncrypt::decryptString($column, $value));
     }
 
     public function scopeWhereNotEncrypted(Builder $query, string $column, string $value): Builder
     {
-        return $query->whereRaw(db_decrypt_string($column, $value, 'NOT LIKE'));
+        return $query->whereRaw(MysqlEncrypt::decryptString($column, $value, 'NOT LIKE'));
     }
 
     public function scopeOrWhereEncrypted(Builder $query, string $column, string $value): Builder
     {
-        return $query->orWhereRaw(db_decrypt_string($column, $value));
+        return $query->orWhereRaw(MysqlEncrypt::decryptString($column, $value));
     }
 
     public function scopeOrWhereNotEncrypted(Builder $query, string $column, string $value): Builder
     {
-        return $query->orWhereRaw(db_decrypt_string($column, $value, 'NOT LIKE'));
+        return $query->orWhereRaw(MysqlEncrypt::decryptString($column, $value, 'NOT LIKE'));
     }
 
     public function scopeOrderByEncrypted(Builder $query, string $column, mixed $direction): Builder
     {
-        return $query->orderByRaw(db_decrypt_string($column, $direction, ''));
+        return $query->orderByRaw(MysqlEncrypt::decryptString($column, $direction, ''));
     }
 }
