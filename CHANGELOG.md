@@ -1,3 +1,7 @@
+## 2.1.1 - 2024-11-29
+
+-   Remove call to global helper
+
 ## 2.1.0 - 2024-11-29
 
 -   Minor refactor
