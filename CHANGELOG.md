@@ -1,3 +1,7 @@
+## 2.2.1 - 2025-03-09
+
+-   Support Laravel 12
+
 ## 2.1.1 - 2024-11-29
 
 -   Remove call to global helper
